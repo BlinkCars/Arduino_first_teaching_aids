@@ -1,0 +1,41 @@
+const int led = 13;
+const int pins[] = {2,3,4,5,6,7,8,9,10,11,12};
+const int photocellPin = 0;
+void setup() {
+// put your setup code here, to run once:
+pinMode(led,OUTPUT);
+for (int i = 0; i < 12; ++i)
+{
+pinMode(pins[i],OUTPUT);
+}
+Serial.begin(9600);
+}
+void loop() {
+// put your main code here, to run repeatedly:
+int rate = analogRead(photocellPin);
+int r = rand()%9;
+if (rate > 500)
+{
+for (int i = r; i < 9; ++i)
+{
+digitalWrite(pins[i],HIGH);
+delay(100);
+digitalWrite(pins[i],LOW);
+delay(100);
+}
+for (int j = 0; j < 3; ++j)
+{
+digitalWrite(pins[9],HIGH);
+delay(100);
+digitalWrite(pins[9],LOW);
+delay(100);
+}
+}else{
+for (int i = 0; i < 12; ++i)
+{
+digitalWrite(pins[i],LOW);
+}
+}
+Serial.println(analogRead(photocellPin));
+delay(1000);
+}
